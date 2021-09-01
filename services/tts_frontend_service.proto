@@ -25,7 +25,7 @@ service TTSFrontend {
   // Normalize text for TTS, returns normalized text prepared for g2p
   rpc Normalize(NormalizeRequest) returns (NormalizeResponse) {}
 
-  // Preprocess text for TTS, including conversion to X-SAMPA
+  // Preprocess text for TTS, including conversion to phonetic representation (g2p)
   rpc TTSPreprocess(PreprocessRequest) returns (PreprocessedResponse) {}
 
   // Default values for the phoneme description
