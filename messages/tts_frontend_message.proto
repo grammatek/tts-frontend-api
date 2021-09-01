@@ -1,0 +1,74 @@
+// Copyright Grammatek ehf.
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+syntax = "proto3";
+
+package com.grammatek.tts_frontend;
+
+// only perform normalization, not g2p
+message NormalizeRequest {
+  string content = 1;
+}
+
+message NormalizeResponse {
+  string normalized_content = 1;
+}
+
+// a complete preprocessing pipeline from raw text to phonetic representation
+message PreprocessRequest {
+  string content = 1;
+  PhonemeDescription description = 2;
+}
+
+message PreprocessedResponse {
+  string processed_content = 1;
+  PhonemeDescription description = 2;
+}
+
+// Phonetic Alphabet 
+// Default: X-SAMPA
+enum PhoneticAlphabet {
+  PHONETIC_ALPHABET_INVALID = 0;
+  PHONETIC_ALPHABET_IPA = 1;
+  PHONETIC_ALPHABET_SAMPA = 2;
+}
+
+// Phoneme string format
+// Default: plain
+enum PhonemeFormat {
+  PHONEME_INVALID = 0;
+  PHONEME_CMU = 1;
+  PHONEME_PLAIN = 2;
+}
+
+// Describes the phoneme string: alphabet, output format, syllabification and labeling
+// Default: X-SAMPA in plain format without syllabification and stress labeling
+message PhonemeDescription {
+  // phoneme alphabet (IPA, SAMPA, ...)
+  PhoneticAlphabet alphabet = 1;
+
+  // The format of the phoneme string (CMU, plain, ...)
+  PhonemeFormat format = 2;
+  bool syllabified = 3;
+  bool stress_labels = 4;
+}
+
+enum ABI_VERSION {
+  ABI_VERSION_INVALID = 0;
+  ABI_VERSION_CURRENT = 0x010000;
+}
+
+message AbiVersionResponse {
+  ABI_VERSION  version = 1;
+}
