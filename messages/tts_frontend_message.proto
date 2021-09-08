@@ -25,6 +25,22 @@ message NormalizeResponse {
   string normalized_content = 1;
 }
 
+message TokenBasedNormalizedResponse {
+  string normalized_content = 1;
+  repeated RawNormalizedTokenInfo token_info = 2;
+}
+
+// contains a token from the original input and the normalized version
+// additional info: index of the original token from the input string and a boolean value to
+// tell if the token was changed in the normalization process (vast majority of tokens are not changed)
+message RawNormalizedTokenInfo {
+  string original_token = 1;
+  string normalized_token = 2;
+  // the index of the original token in the original input string
+  int32 original_index = 3;
+  bool has_changed = 4;
+}
+
 // a complete preprocessing pipeline from raw text to phonetic representation
 message PreprocessRequest {
   string content = 1;

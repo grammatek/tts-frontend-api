@@ -25,6 +25,9 @@ service TTSFrontend {
   // Normalize text for TTS, returns normalized text prepared for g2p
   rpc Normalize(NormalizeRequest) returns (NormalizeResponse) {}
 
+  // Normalize text for TTS, returns normalized text prepared for g2p as a map of original tokens and normalized tokens
+  rpc NormalizeTokenwise(NormalizeRequest) returns (TokenBasedNormalizedResponse) {}
+
   // Preprocess text for TTS, including conversion to phonetic representation (g2p)
   rpc TTSPreprocess(PreprocessRequest) returns (PreprocessedResponse) {}
 
