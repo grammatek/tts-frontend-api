@@ -22,12 +22,18 @@ message NormalizeRequest {
   NormalizationDomain domain = 2;
 }
 
+// The normalizer splits the content from the request into sentences. The response thus has a repeated field
+// of normalized sentences
 message NormalizeResponse {
-  string normalized_content = 1;
+  repeated string normalized_sentence = 1;
 }
 
 message TokenBasedNormalizedResponse {
-  string normalized_content = 1;
+  repeated TokenBasedNormalizedSentence sentence = 1;
+}
+
+message TokenBasedNormalizedSentence {
+  string normalized_sentence = 1;
   repeated RawNormalizedTokenInfo token_info = 2;
 }
 
